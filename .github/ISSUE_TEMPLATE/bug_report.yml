@@ -1,0 +1,139 @@
+name: 错误反馈
+description: 反馈版本信息、下载文件、网站显示或其他问题
+title: "[错误]: "
+labels: [ "错误" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 感谢你愿意向我们反馈问题！
+
+        为了方便我们定位和处理问题，请在提交前确认以下事项：
+
+        ### 请先搜索现有的 Issue，确认没有相同或类似的问题。
+        ### 请尽可能准确、完整地填写下方信息。
+        ### 如果你不确定如何描述问题，请阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)。
+
+        ---
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已经确认该问题不是由于个人使用方式或操作不当造成的。
+          required: true
+        - label: 我已经在 [Issue](https://github.com/Spectrollay-StardewValley/Repository/issues) 中搜索过，没有找到相同或类似的问题。
+          required: true
+        - label: 我确认本 Issue 的内容属于错误反馈。如果是版本收录、功能建议或其他类型的问题，我会选择合适的模板提交。
+          required: true
+        - label: 我已知晓，如果没有按照模板要求提供必要信息，该 Issue 可能会被要求补充信息或关闭。
+          required: true
+
+  - type: dropdown
+    id: error_type
+    attributes:
+      label: 错误类型
+      description: 请选择你发现的问题类型。
+      options:
+        - 版本信息错误
+        - 下载链接或文件错误
+        - 网站显示或功能错误
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: error_type_other
+    attributes:
+      label: 其他错误类型
+      description: 如果上方选择了「其他」，请简单说明具体类型。
+      placeholder: 例如：某个版本的文件校验信息与实际不符
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: 涉及的游戏版本
+      description: 如果问题与具体版本有关，请填写版本号；网站通用问题可留空。
+      placeholder: 例如：1.6.15.0
+    validations:
+      required: false
+
+  - type: input
+    id: platform
+    attributes:
+      label: 设备与系统环境
+      description: 如果问题与设备或浏览器有关，请填写相关信息。
+      placeholder: 例如：Android 14 / Chrome / arm64-v8a
+    validations:
+      required: false
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题描述
+      description: |
+        请详细描述你发现的问题，并尽可能提供能够帮助我们定位问题的信息。
+
+        如果是版本信息错误，请写明当前信息及存在的问题。
+        如果是下载或文件问题，请提供文件名称、下载入口及实际表现。
+        如果是网站问题，请描述具体操作步骤和异常现象。
+      placeholder: |
+        当前情况：
+        ...
+
+        操作步骤（如适用）：
+        1. ...
+        2. ...
+
+        问题：
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 你认为的正确内容
+      description: 请描述正确的版本信息、预期的下载结果或网站应有的表现。
+      placeholder: |
+        预期结果：
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 相关截图或参考资料
+      description: 如果方便，请提供相关截图、页面链接或用于核实版本信息的参考来源。
+    validations:
+      required: false
+
+  - type: textarea
+    id: logging
+    attributes:
+      label: 错误日志
+      description: 如果问题产生了错误日志，可以在这里提供。请记得删除其中的个人隐私或敏感信息。
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充说明
+      description: 如果还有其他需要说明的内容，可以在这里补充。
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+        ## 感谢你的反馈！
+
+        我们会在确认问题后进行处理。如果需要补充信息，我们可能会在 Issue 中留言。

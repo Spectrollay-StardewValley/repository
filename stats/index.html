@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#F7F8F4" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#171C18" media="(prefers-color-scheme: dark)">
+    <title>仓库统计信息 | 星露谷物语版本库</title>
+    <style>
+        :root {
+            color-scheme: light dark;
+            --background: #F7F8F4;
+            --foreground: #314336;
+            --muted: #748474;
+            --link: #3C8527;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: #171C18;
+                --foreground: #EEF5EE;
+                --muted: #A7B8AD;
+                --link: #9ED781;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--background);
+            color: var(--foreground);
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        main {
+            width: 100%;
+            max-width: 860px;
+            padding: 32px 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: clamp(20px, 4vw, 26px);
+        }
+
+        .description {
+            margin: 0 0 24px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .stats-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 780 / 452;
+        }
+
+        .stats-container object {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .footer {
+            margin-top: 22px;
+            font-size: 13px;
+        }
+
+        a {
+            color: var(--link);
+            text-underline-offset: 3px;
+        }
+
+        a:hover {
+            text-decoration-thickness: 2px;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>仓库统计信息</h1>
+    <p class="description">点击统计卡片中的项目即可查看对应页面</p>
+
+    <div class="stats-container">
+        <object id="stats" type="image/svg+xml" data="./repository-stats-light.svg" aria-label="可交互的仓库统计信息">
+            <p>无法加载仓库统计图片<a href="./repository-stats-light.svg">点击此处查看统计图片</a></p>
+        </object>
+    </div>
+
+    <div class="footer">
+        <a href="https://github.com/Spectrollay-StardewValley/Repository">返回 GitHub 仓库</a>
+    </div>
+</main>
+
+<script>
+    const stats = document.getElementById('stats');
+    const theme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function updateTheme() {
+        const file = theme.matches ? 'repository-stats-dark.svg' : 'repository-stats-light.svg';
+
+        const url = new URL(file, document.baseURI).href;
+
+        if (stats.data !== url) {
+            stats.data = url;
+        }
+
+        const fallback = stats.querySelector('a');
+        if (fallback) fallback.href = `./${file}`;
+    }
+
+    updateTheme();
+    theme.addEventListener('change', updateTheme);
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+name: 功能建议
+description: 提出网站功能、交互体验或内容展示方面的改进建议
+title: "[建议]: "
+labels: [ "建议" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 感谢你愿意向我们提出建议！
+
+        在提交之前，请先确认：
+
+        ### 请先搜索现有的 Issue，确认没有相同或类似的建议。
+        ### 请尽可能清楚地描述你的想法、使用场景与预期效果。
+        ### 如果你不确定如何描述问题，请阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)。
+
+        ---
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已经在 [Issue](https://github.com/Spectrollay-StardewValley/Repository/issues) 中搜索过，没有找到相同或类似的建议。
+          required: true
+        - label: 我确认本 Issue 的内容属于功能建议，而不是错误反馈或版本收录请求。
+          required: true
+        - label: 我确认建议内容与星露谷物语版本库有关。
+          required: true
+        - label: 我已知晓，提交建议不代表该功能一定会被实现。
+          required: true
+
+  - type: dropdown
+    id: suggestion_type
+    attributes:
+      label: 建议类型
+      description: 请选择建议主要涉及的方面。
+      options:
+        - 网站功能
+        - 页面显示与交互
+        - 版本检索与筛选
+        - 版本信息展示
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 建议描述
+      description: 请详细描述你希望增加或改进的功能。
+      placeholder: |
+        目前情况：
+        ...
+
+        希望改进的内容：
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: 建议原因与预期效果
+      description: 请说明为什么需要这项改进，以及它能解决什么问题。
+      placeholder: |
+        使用场景：
+        ...
+
+        预期效果：
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 相关截图或参考资料
+      description: 如果有示例图片、参考网站或其他资料，可以在这里提供。
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充说明
+      description: 如果还有其他需要说明的内容，可以在这里补充。
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+        ## 感谢你的建议！
+
+        我们会根据项目定位、实现难度和维护情况评估建议。

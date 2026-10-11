@@ -1,0 +1,158 @@
+name: 版本收录
+description: 建议收录新的游戏版本、支持其他平台或补充现有版本的缺失资料
+title: "[版本收录]: "
+labels: [ "版本收录" ]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 感谢你愿意帮助完善版本库！
+
+        在提交之前，请先确认：
+
+        ### 请先在项目网站及现有 Issue 中搜索，确认没有相同或类似的内容。
+        ### 请尽可能提供准确、完整的版本信息与可核实的参考来源。
+        ### 如果你不确定如何描述问题，请阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)。
+
+        ---
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已经确认建议收录的版本尚未提供，或现有版本存在需要补充的缺失资料。
+          required: true
+        - label: 我已经在 [Issue](https://github.com/Spectrollay-StardewValley/Repository/issues) 中搜索过，没有找到相同或类似的请求。
+          required: true
+        - label: 我确认本 Issue 的内容属于版本收录或资料补充，而不是现有版本信息错误或网站功能建议。
+          required: true
+        - label: 我已知晓，提交收录或补充请求不代表相关内容一定会被采纳。
+          required: true
+
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: 请求类型
+      description: 请选择本次请求的主要类型。
+      options:
+        - 收录尚未提供的游戏版本
+        - 补充现有版本的缺失资料
+        - 请求支持其他游戏平台
+        - 其他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 游戏平台
+      description: 请选择涉及的游戏平台。
+      options:
+        - Android
+        - iOS
+        - Windows
+        - macOS
+        - Linux
+        - Nintendo Switch
+        - PlayStation
+        - Xbox
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: platform_other
+    attributes:
+      label: 其他游戏平台
+      description: 如果上方选择了「其他」，请填写具体的平台名称。
+      placeholder: 例如：某个尚未列出的游戏平台
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: 游戏版本
+      description: 请填写希望收录或补充资料的 Stardew Valley 游戏版本号。如果是平台整体收录建议，可以留空。
+      placeholder: 例如：1.6.15.0
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 版本信息
+      description: |
+        请填写你希望收录或补充的内容。
+
+        如果是新增版本，请尽可能提供版本号、发布日期、版本编号、系统要求等信息。
+        如果是资料补充，请说明当前缺失的内容，并提供你掌握的更新说明、历史记录或其他资料。
+        如果是其他平台的收录请求，请说明希望支持的平台及相关版本信息。
+      placeholder: |
+        版本号：
+        发布日期：
+        版本编号：
+        系统要求：
+
+        希望收录或补充的内容：
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: 参考来源
+      description: |
+        请提供可以帮助核实相关信息的来源，例如官方更新公告、历史版本记录、存档资料或其他可信来源。
+
+        如果是补充已经遗失的更新说明，可以直接提供你保存的原始内容或相关资料。
+      placeholder: |
+        参考链接：
+        ...
+
+        相关资料：
+        ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: resource
+    attributes:
+      label: 版本文件或资源来源
+      description: |
+        如果你拥有相关版本的原始安装文件、历史备份或其他资源，欢迎在这里提供文件来源或获取方式，帮助我们补充完善版本库。
+
+        请尽可能说明文件名称、版本信息、文件大小、校验值（如 SHA-256）及资源来源。
+
+        如果文件已经失传，但你知道可能的获取途径，也欢迎提供相关线索。
+
+        请注意，不要提供包含个人隐私的文件或未经授权的私人资源。
+      placeholder: |
+        文件名称：
+        资源链接：
+        文件大小：
+        SHA-256：
+        其他说明：
+        ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充说明
+      description: 如果还有其他需要说明的内容，可以在这里补充。
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+        ## 感谢你的帮助！
+
+        我们会根据资料的可核实程度、内容完整性及项目维护情况，决定是否收录或补充相关内容。如果需要进一步确认，我们可能会在 Issue 中留言。
