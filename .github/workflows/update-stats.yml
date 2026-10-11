@@ -2,8 +2,23 @@ name: Update Repository Stats
 
 on:
   schedule:
-    - cron: '23 3 * * *'
+    - cron: '0 0 * * *'
+
   workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/**'
+      - 'stats/**'
+      - 'LICENSE'
+      - 'README.md'
+      - 'README-en_US.md'
+
+  release:
+    types:
+      - published
 
 permissions:
   contents: write

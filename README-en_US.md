@@ -13,7 +13,7 @@
 
 #### Version Archive · Information Collection · Continuous Updates
 
-<a href="https://stardewvalley.spectrollay.com/stats/" target="_blank" rel="noopener noreferrer">
+<a href="https://stardewvalley.spectrollay.com/stats/index.html" target="_blank" rel="noopener noreferrer">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="stats/repository-stats-dark.svg">
     <img src="stats/repository-stats-light.svg" alt="Repository Statistics" width="780">
