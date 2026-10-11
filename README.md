@@ -12,7 +12,7 @@
 
 #### 版本归档 · 信息整理 · 持续更新
 
-<a href="https://stardewvalley.spectrollay.com/stats/repository/index.html" target="_blank" rel="noopener noreferrer">
+<a href="https://stardewvalley.spectrollay.com/repository/stats/index.html" target="_blank" rel="noopener noreferrer">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="stats/repository-stats-dark.svg">
     <img src="stats/repository-stats-light.svg" alt="Repository Statistics" width="780">
