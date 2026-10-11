@@ -57,9 +57,9 @@
 
 如果希望提供历史安装文件或其他资源线索，也可以与开发者取得联系。
 
-[![Telegram 频道](https://img.shields.io/badge/Telegram-版本库频道-blue?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/stardewvalley_repository)
-[![Telegram 群组](https://img.shields.io/badge/Telegram-交流群-blue?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/spectrollay_workshop)
-[![QQ 群组](https://img.shields.io/badge/QQ-交流群-blue?style=for-the-badge&logo=tencentqq&logoColor=white)](https://qm.qq.com/q/AqLmKLH9mM)
+[![Telegram 频道](https://img.shields.io/badge/Telegram-版本库频道-blue?style=for-the-badge)](https://t.me/stardewvalley_repository)
+[![Telegram 群组](https://img.shields.io/badge/Telegram-交流群-blue?style=for-the-badge)](https://t.me/spectrollay_workshop)
+[![QQ 群组](https://img.shields.io/badge/QQ-交流群-blue?style=for-the-badge)](https://qm.qq.com/q/AqLmKLH9mM)
 
 ---
 
