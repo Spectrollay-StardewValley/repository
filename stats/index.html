@@ -67,7 +67,22 @@
             aspect-ratio: 780 / 452;
         }
 
-        @media (max-width: 760px) {
+        .stats-container.is-error {
+            display: none;
+        }
+
+        .stats-error {
+            display: none;
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .stats-error.is-visible {
+            display: block;
+        }
+
+        @media (max-width: 840px) {
             .stats-container {
                 max-width: 360px;
                 aspect-ratio: 360 / 500;
@@ -103,11 +118,15 @@
     <h1>仓库统计信息</h1>
     <p class="description">点击统计卡片中的项目即可查看对应页面</p>
 
-    <div class="stats-container">
+    <div class="stats-container" id="stats-container">
         <object id="stats" type="image/svg+xml" data="./repository-stats-light.svg" aria-label="可交互的仓库统计信息">
-            <p>无法加载仓库统计图片<a href="./repository-stats-light.svg">点击此处查看统计图片</a></p>
+            <p>无法加载仓库统计图片</p>
         </object>
     </div>
+
+    <p class="stats-error" id="stats-error" role="status">
+        仓库统计信息暂时无法加载，请稍后重试。
+    </p>
 
     <div class="footer">
         <a href="https://github.com/Spectrollay-StardewValley/Repository">返回 GitHub 仓库</a>
@@ -116,8 +135,28 @@
 
 <script>
     const stats = document.getElementById('stats');
+    const container = document.getElementById('stats-container');
+    const errorMessage = document.getElementById('stats-error');
     const theme = window.matchMedia('(prefers-color-scheme: dark)');
-    const mobile = window.matchMedia('(max-width: 760px)');
+    const mobile = window.matchMedia('(max-width: 840px)');
+
+    function setError(failed) {
+        container.classList.toggle('is-error', failed);
+        errorMessage.classList.toggle('is-visible', failed);
+    }
+
+    stats.addEventListener('load', () => {
+        try {
+            const root = stats.contentDocument?.documentElement;
+            setError(root?.namespaceURI !== 'http://www.w3.org/2000/svg');
+        } catch {
+            setError(true);
+        }
+    });
+
+    stats.addEventListener('error', () => {
+        setError(true);
+    });
 
     function updateStats() {
         const device = mobile.matches ? 'mobile-' : '';
@@ -126,6 +165,7 @@
         const url = new URL(file, document.baseURI).href;
 
         if (stats.data !== url) {
+            setError(false);
             stats.data = url;
         }
     }

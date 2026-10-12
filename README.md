@@ -14,9 +14,9 @@
 
 <a href="https://stardewvalley.spectrollay.com/repository/stats/index.html" target="_blank" rel="noopener noreferrer">
   <picture>
-    <source media="(max-width: 760px) and (prefers-color-scheme: dark)" srcset="stats/repository-stats-mobile-dark.svg">
-    <source media="(max-width: 760px)" srcset="stats/repository-stats-mobile-light.svg">
-    <source media="(prefers-color-scheme: dark)" srcset="stats/repository-stats-dark.svg">
+    <source media="(max-width: 850px) and (prefers-color-scheme: dark)" srcset="stats/repository-stats-mobile-dark.svg" width="460">
+    <source media="(max-width: 850px)" srcset="stats/repository-stats-mobile-light.svg" width="460">
+    <source media="(prefers-color-scheme: dark)" srcset="stats/repository-stats-dark.svg" width="780">
     <img src="stats/repository-stats-light.svg" alt="Repository Statistics" width="780">
   </picture>
 </a>
