@@ -1,6 +1,5 @@
-
 #!/usr/bin/env python3
-"""Generate light/dark GitHub repository statistics SVGs (stdlib only)."""
+"""Generate interactive desktop/mobile light/dark GitHub statistics SVGs (stdlib only)."""
 
 import json
 import os
@@ -218,15 +217,11 @@ def icon(kind, x, y, color, size=18):
         'clock': 17,
         'scale': 15,
     }
-
-    offsets = {
-        'drive': (0, -0.5),
-    }
+    offsets = {'drive': (0, -0.5)}
 
     spec = icons[kind]
-    display_size = sizes.get(kind, size)
+    display_size = size if kind == 'scale' else sizes.get(kind, size)
     dx, dy = offsets.get(kind, (0, 0))
-
     x += (size - display_size) / 2 + dx
     y += (size - display_size) / 2 + dy
 
@@ -246,8 +241,8 @@ def icon(kind, x, y, color, size=18):
     )
 
 
-def draw_svg(stats, dark=False):
-    c = ({
+def theme_colors(dark):
+    return ({
         'bg': '#171C18',
         'panel': '#1D231F',
         'stroke': '#33443A',
@@ -269,10 +264,12 @@ def draw_svg(stats, dark=False):
         'divider': '#D6E2D1',
     })
 
-    font = 'Segoe UI, Arial, sans-serif'
+
+def stat_links(stats):
     base = f'https://github.com/{stats["repository"]}'
     branch = stats.get('branch', 'main')
-    links = {
+    return {
+        'home': base,
         'star': f'{base}/stargazers',
         'fork': f'{base}/forks',
         'commit': f'{base}/commits/{branch}',
@@ -284,10 +281,13 @@ def draw_svg(stats, dark=False):
         'scale': f'{base}/blob/{branch}/LICENSE',
     }
 
-    def start_link(url):
-        return f'<a href="{escape(url, quote=True)}" target="_blank" style="cursor: pointer">'
 
-    items = [
+def start_link(url):
+    return f'<a href="{escape(url, quote=True)}" target="_blank" style="cursor: pointer">'
+
+
+def stat_items(stats):
+    return [
         ('Stars', stats['stars'], 'star'),
         ('Forks', stats['forks'], 'fork'),
         ('Commits', stats['commits'], 'commit'),
@@ -296,23 +296,29 @@ def draw_svg(stats, dark=False):
         ('Latest Release', stats['release'], 'tag'),
     ]
 
+
+def draw_svg(stats, dark=False):
+    """Desktop layout: 780x452, three columns and two rows."""
+    c = theme_colors(dark)
+    font = 'Segoe UI, Arial, sans-serif'
+    links = stat_links(stats)
+
     parts = [f'''<svg xmlns="http://www.w3.org/2000/svg" width="780" height="452" viewBox="0 0 780 452" role="img" aria-label="Stardew Valley Repository statistics">
 <rect width="780" height="452" rx="16" fill="{c['bg']}"/>
 <rect x="1" y="1" width="778" height="450" rx="15" fill="none" stroke="{c['stroke']}"/>
 <rect x="17" y="16" width="6" height="53" rx="3" fill="{c['accent']}"/>
-{start_link(base)}
+{start_link(links['home'])}
 <text x="38" y="43" font-size="23" font-weight="700" fill="{c['text']}" font-family="{font}">Stardew Valley Repository</text>
 <text x="38" y="64" font-size="12" fill="{c['muted']}" font-family="{font}">{escape(stats['repository'])}</text>
 </a>
 <rect x="640" y="27" width="122" height="26" rx="9" fill="{c['badge']}"/>
 <text x="701" y="44" text-anchor="middle" font-size="10" font-weight="700" fill="{c['accent']}" font-family="{font}">REPOSITORY STATS</text>''']
 
-    for i, (label, value, kind) in enumerate(items):
+    for i, (label, value, kind) in enumerate(stat_items(stats)):
         x = 17 + (i % 3) * 252
         y = 85 + (i // 3) * 122
         value_text = escape(f'{value:,}' if isinstance(value, int) else str(value))
         font_size = 27 if len(value_text) <= 9 else 21 if len(value_text) <= 14 else 17
-
         parts.append(f'''{start_link(links[kind])}
 <rect x="{x}" y="{y}" width="242" height="111" rx="11" fill="{c['panel']}" stroke="{c['stroke']}"/>
 <text x="{x + 16}" y="{y + 29}" font-size="13" fill="{c['muted']}" font-family="{font}">{escape(label)}</text>
@@ -341,7 +347,66 @@ def draw_svg(stats, dark=False):
 <text x="763" y="437" text-anchor="end" font-size="14" font-weight="700" fill="{c['accent']}" font-family="{font}">MIT License</text>
 </a>
 </svg>''')
+    return '\n'.join(parts) + '\n'
 
+
+def draw_svg_mobile(stats, dark=False):
+    """Mobile layout: 360x500, two columns and three rows."""
+    c = theme_colors(dark)
+    font = 'Segoe UI, Arial, sans-serif'
+    links = stat_links(stats)
+
+    parts = [f'''<svg xmlns="http://www.w3.org/2000/svg" width="360" height="500" viewBox="0 0 360 500" role="img" aria-label="Stardew Valley Repository mobile statistics">
+<rect width="360" height="500" rx="16" fill="{c['bg']}"/>
+<rect x="1" y="1" width="358" height="498" rx="15" fill="none" stroke="{c['stroke']}"/>
+<rect x="16" y="17" width="5" height="48" rx="2.5" fill="{c['accent']}"/>
+
+{start_link(links['home'])}
+<text x="30" y="39" font-size="19" font-weight="700" fill="{c['text']}" font-family="{font}">Stardew Valley Repository</text>
+<text x="30" y="57" font-size="10" fill="{c['muted']}" font-family="{font}">{escape(stats['repository'])}</text>
+</a>
+
+<rect x="228" y="68" width="116" height="22" rx="8" fill="{c['badge']}"/>
+<text x="286" y="83" text-anchor="middle" font-size="10" font-weight="700" fill="{c['accent']}" font-family="{font}">REPOSITORY STATS</text>''']
+
+    for i, (label, value, kind) in enumerate(stat_items(stats)):
+        x = 16 + (i % 2) * 169
+        y = 103 + (i // 2) * 92
+
+        value_text = escape(f'{value:,}' if isinstance(value, int) else str(value))
+        font_size = 24 if len(value_text) <= 8 else 19 if len(value_text) <= 12 else 15
+
+        parts.append(f'''{start_link(links[kind])}
+<rect x="{x}" y="{y}" width="159" height="82" rx="11" fill="{c['panel']}" stroke="{c['stroke']}"/>
+<text x="{x + 13}" y="{y + 23}" font-size="12.5" fill="{c['muted']}" font-family="{font}">{escape(label)}</text>
+{icon(kind, x + 128, y + 13, c['accent'])}
+<text x="{x + 13}" y="{y + 61}" font-size="{font_size}" font-weight="700" fill="{c['text']}" font-family="{font}">{value_text}</text>
+</a>''')
+
+    parts.append(f'''<rect x="16" y="381" width="328" height="78" rx="11" fill="{c['info']}"/>
+<path d="M28 420H332" stroke="{c['divider']}" stroke-width="1"/>
+
+{start_link(links['drive'])}
+<rect x="16" y="381" width="328" height="39" fill="transparent"/>
+{icon('drive', 28, 394, c['accent'])}
+<text x="56" y="408" font-size="13" fill="{c['muted']}" font-family="{font}">Repository Size</text>
+<text x="332" y="408" text-anchor="end" font-size="16" font-weight="700" fill="{c['text']}" font-family="{font}">{escape(stats['size'])}</text>
+</a>
+
+{start_link(links['clock'])}
+<rect x="16" y="420" width="328" height="39" fill="transparent"/>
+{icon('clock', 28, 433, c['accent'])}
+<text x="56" y="447" font-size="13" fill="{c['muted']}" font-family="{font}">Last Commit</text>
+<text x="332" y="447" text-anchor="end" font-size="16" font-weight="700" fill="{c['text']}" font-family="{font}">{escape(stats['last_commit'])}</text>
+</a>
+
+<text x="16" y="484" font-size="11" fill="{c['muted']}" font-family="{font}">Data from GitHub API</text>
+
+{start_link(links['scale'])}
+{icon('scale', 258, 472, c['accent'], 14)}
+<text x="344" y="484" text-anchor="end" font-size="12" font-weight="700" fill="{c['accent']}" font-family="{font}">MIT License</text>
+</a>
+</svg>''')
     return '\n'.join(parts) + '\n'
 
 
@@ -369,15 +434,20 @@ def main():
     target = OUTPUT / 'preview' if preview else OUTPUT
     target.mkdir(parents=True, exist_ok=True)
 
-    for theme in ('light', 'dark'):
-        path = target / f'repository-stats-{theme}.svg'
-        path.write_text(draw_svg(stats, theme == 'dark'), encoding='utf-8')
+    outputs = (
+        ('repository-stats-light.svg', draw_svg(stats, False)),
+        ('repository-stats-dark.svg', draw_svg(stats, True)),
+        ('repository-stats-mobile-light.svg', draw_svg_mobile(stats, False)),
+        ('repository-stats-mobile-dark.svg', draw_svg_mobile(stats, True)),
+    )
+    for name, content in outputs:
+        path = target / name
+        path.write_text(content, encoding='utf-8')
         print('Generated:', path)
-
         if preview:
             opened = webbrowser.open(path.resolve().as_uri())
             if not opened:
-                print('Browser did not open automatically. Open this file manually:', path)
+                print('Browser did not open automatically. Open manually:', path)
 
 
 if __name__ == '__main__':

@@ -62,7 +62,16 @@
         .stats-container {
             position: relative;
             width: 100%;
+            max-width: 780px;
+            margin-inline: auto;
             aspect-ratio: 780 / 452;
+        }
+
+        @media (max-width: 760px) {
+            .stats-container {
+                max-width: 360px;
+                aspect-ratio: 360 / 500;
+            }
         }
 
         .stats-container object {
@@ -108,22 +117,22 @@
 <script>
     const stats = document.getElementById('stats');
     const theme = window.matchMedia('(prefers-color-scheme: dark)');
+    const mobile = window.matchMedia('(max-width: 760px)');
 
-    function updateTheme() {
-        const file = theme.matches ? 'repository-stats-dark.svg' : 'repository-stats-light.svg';
-
+    function updateStats() {
+        const device = mobile.matches ? 'mobile-' : '';
+        const mode = theme.matches ? 'dark' : 'light';
+        const file = `repository-stats-${device}${mode}.svg`;
         const url = new URL(file, document.baseURI).href;
 
         if (stats.data !== url) {
             stats.data = url;
         }
-
-        const fallback = stats.querySelector('a');
-        if (fallback) fallback.href = `./${file}`;
     }
 
-    updateTheme();
-    theme.addEventListener('change', updateTheme);
+    updateStats();
+    theme.addEventListener('change', updateStats);
+    mobile.addEventListener('change', updateStats);
 </script>
 </body>
 </html>

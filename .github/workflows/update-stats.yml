@@ -46,7 +46,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add stats/repository-stats-light.svg stats/repository-stats-dark.svg
+          git add stats/repository-stats-light.svg stats/repository-stats-dark.svg \
+            stats/repository-stats-mobile-light.svg stats/repository-stats-mobile-dark.svg
           if ! git diff --cached --quiet; then
             git commit -m 'chore: update repository stats'
             git push
