@@ -12,7 +12,7 @@
 <rect x="17" y="85" width="242" height="111" rx="11" fill="#1D231F" stroke="#33443A"/>
 <text x="33" y="114" font-size="13" fill="#A7B8AD" font-family="Segoe UI, Arial, sans-serif">Stars</text>
 <svg x="220.5" y="100.5" width="19" height="19" viewBox="0 0 24 24" color="#9ED781" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2L14.63 8.53L20.5 9.38L16.25 13.52L17.25 19.35L12 16.6L6.75 19.35L7.75 13.52L3.5 9.38L9.37 8.53Z"/></svg>
-<text x="33" y="166" font-size="27" font-weight="700" fill="#EEF5EE" font-family="Segoe UI, Arial, sans-serif">1</text>
+<text x="33" y="166" font-size="27" font-weight="700" fill="#EEF5EE" font-family="Segoe UI, Arial, sans-serif">2</text>
 </a>
 <a href="https://github.com/Spectrollay-StardewValley/repository/forks" target="_blank" style="cursor: pointer">
 <rect x="269" y="85" width="242" height="111" rx="11" fill="#1D231F" stroke="#33443A"/>
@@ -50,7 +50,7 @@
 <a href="https://github.com/Spectrollay-StardewValley/repository" target="_blank" style="cursor: pointer">
 <svg x="37.0" y="365.5" width="20" height="20" viewBox="0 0 24 24" color="#9ED781" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="6.2" width="17.6" height="11.2" rx="2.2"/><path d="M5.2 11.2h13.6"/><circle cx="17.3" cy="14.4" r="1" fill="currentColor" stroke="none"/></svg>
 <text x="64" y="381" font-size="14" fill="#A7B8AD" font-family="Segoe UI, Arial, sans-serif">Repository Size</text>
-<text x="175" y="381" font-size="17" font-weight="700" fill="#EEF5EE" font-family="Segoe UI, Arial, sans-serif">235.00 KB</text>
+<text x="175" y="381" font-size="17" font-weight="700" fill="#EEF5EE" font-family="Segoe UI, Arial, sans-serif">240.00 KB</text>
 </a>
 
 <a href="https://github.com/Spectrollay-StardewValley/repository/commits/main" target="_blank" style="cursor: pointer">
